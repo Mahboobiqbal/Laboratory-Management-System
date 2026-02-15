@@ -101,7 +101,7 @@ class DashboardController extends Controller
                 ->whereBetween('created_at', [$todayStart, $todayEnd])
                 ->sum('commission_amount') ?? 0;
 
-            $balanceToday = $billedToday - $expensesToday - $paidCommissionsToday;
+            $balanceToday = $billedToday - $expensesToday;
 
             return compact(
                 'billedToday',

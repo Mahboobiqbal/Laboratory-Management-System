@@ -26,7 +26,7 @@
         @if (Auth::user()->user_type == 'Admin' || Auth::user()->user_type == 'Super Admin' || Auth::user()->user_type == 'Employees')
             <!-- Quick Links Section -->
             <div class="row mb-4">
-                <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
                     <a href="{{ route('patients.create') }}" class="text-decoration-none">
                         <div class="card dashboard-card h-100">
                             <div class="card-body card-body dashboard-card-unified">
@@ -43,7 +43,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
                     <a href="{{ route('allbills') }}" class="text-decoration-none">
                         <div class="card dashboard-card h-100">
                             <div class="card-body card-body dashboard-card-unified">
@@ -54,6 +54,23 @@
                                     <div class="content-section">
                                         <h5 class="card-title dashboard-card-unified">All Bills</h5>
                                         <p class="dashboard-card-text1">View all bills</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                    <a href="{{ route('balance.day-wise') }}" class="text-decoration-none">
+                        <div class="card dashboard-card h-100">
+                            <div class="card-body card-body dashboard-card-unified">
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-section">
+                                        <i class="fas fa-calendar-check dashboard-card-icon"></i>
+                                    </div>
+                                    <div class="content-section">
+                                        <h5 class="card-title dashboard-card-unified">Day-wise Balance</h5>
+                                        <p class="dashboard-card-text1">View historical balance</p>
                                     </div>
                                 </div>
                             </div>

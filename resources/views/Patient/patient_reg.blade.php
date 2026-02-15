@@ -179,7 +179,7 @@
                                             <div class="row">
                                                 <div class="col-md-6 mb-4">
                                                     <label for="referred_by" class="form-label">Referred By</label>
-                                                    <select class="form-control modern-input" id="referred_by"
+                                                    <select class="form-control modern-input select2-referral" id="referred_by"
                                                         name="referred_by">
                                                         <option value="">Select Referral</option>
                                                         @php
@@ -540,6 +540,80 @@
                 justify-content: center;
             }
         }
+
+        /* Select2 Custom Styling to Match Modern Form */
+        .select2-container--default .select2-selection--single {
+            border: 2px solid #e2e8f0 !important;
+            border-radius: 0.75rem !important;
+            height: 45px !important;
+            padding: 0.5rem 1rem !important;
+            background: #f8fafc !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .select2-container--default .select2-selection--single:focus,
+        .select2-container--default.select2-container--focus .select2-selection--single,
+        .select2-container--default.select2-container--open .select2-selection--single {
+            border-color: var(--primary) !important;
+            background: white !important;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+            outline: none !important;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 28px !important;
+            padding-left: 0 !important;
+            color: #374151 !important;
+            font-size: 1rem !important;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__placeholder {
+            color: #9ca3af !important;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 43px !important;
+            right: 8px !important;
+        }
+
+        .select2-dropdown {
+            border: 2px solid #e2e8f0 !important;
+            border-radius: 0.75rem !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .select2-container--default .select2-search--dropdown .select2-search__field {
+            border: 2px solid #e2e8f0 !important;
+            border-radius: 0.5rem !important;
+            padding: 0.5rem !important;
+            background: #f8fafc !important;
+        }
+
+        .select2-container--default .select2-search--dropdown .select2-search__field:focus {
+            border-color: var(--primary) !important;
+            background: white !important;
+            outline: none !important;
+        }
+
+        .select2-container--default .select2-results__option--highlighted[aria-selected] {
+            background-color: var(--primary) !important;
+            color: white !important;
+        }
+
+        .select2-container--default .select2-results__option[aria-selected=true] {
+            background-color: rgba(37, 99, 235, 0.1) !important;
+            color: var(--primary) !important;
+        }
+
+        .select2-results__option {
+            padding: 0.75rem 1rem !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__clear {
+            margin-right: 10px !important;
+            font-size: 1.2rem !important;
+        }
     </style>
 @endsection
 @section('scripts')
@@ -679,6 +753,30 @@
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate());
             reportingField.value = formatLocalDateTime(tomorrow);
+        }
+
+        // ======== 3. SELECT2 INITIALIZATION ========
+        // Initialize Select2 for referral dropdown
+        if (typeof $.fn.select2 !== 'undefined') {
+            $('.select2-referral').select2({
+                placeholder: 'Search and select a referral',
+                allowClear: true,
+                width: '100%',
+                theme: 'default',
+                language: {
+                    noResults: function() {
+                        return "No referral found";
+                    },
+                    searching: function() {
+                        return "Searching...";
+                    }
+                }
+            });
+
+            // Apply custom styling to match the modern form
+            $('.select2-referral').on('select2:open', function() {
+                $('.select2-search__field').attr('placeholder', 'Type to search...');
+            });
         }
     });
 })();

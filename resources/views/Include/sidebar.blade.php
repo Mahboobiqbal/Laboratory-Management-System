@@ -313,11 +313,11 @@
                                         <i class="fas fa-money-bill-wave"></i> Expense Analysis
                                     </a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a href="{{ route('financial.doctor-commissions') }}">
                                         <i class="fas fa-user-md"></i> Doctor Commissions
                                     </a>
-                                </li>
+                                </li> -->
                                 <li>
                                     <a href="{{ route('financial.wages') }}">
                                         <i class="fas fa-hand-holding-usd"></i> Wages & Salaries

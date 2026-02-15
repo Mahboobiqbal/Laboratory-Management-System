@@ -174,6 +174,14 @@ Route::middleware(['auth:sanctum', 'verified'])
 
         // Balance overview
         Route::get('/balance', 'App\Http\Controllers\BalanceController@index')->name('balance.index');
+        
+        // Day-wise Balance Routes
+        Route::get('/balance/day-wise', 'App\Http\Controllers\DayWiseBalanceController@index')
+            ->name('balance.day-wise')
+            ->middleware('role:Admin,Super Admin,Accountant');
+        Route::get('/balance/day-wise/data', 'App\Http\Controllers\DayWiseBalanceController@getBalanceForDate')
+            ->name('balance.day-wise.data')
+            ->middleware('role:Admin,Super Admin,Accountant');
 
         // Expenses Routes
         Route::resource('expenses', 'App\Http\Controllers\ExpenseController');

@@ -205,7 +205,7 @@
                                         <label for="referred_by" class="font-weight-bold">
                                             <i class="fas fa-user-md text-primary-custom mr-1"></i> Referred By
                                         </label>
-                                        <select id="referred_by" name="referred_by" class="form-control">
+                                        <select id="referred_by" name="referred_by" class="form-control select2-referral">
                                             <option value="">Select Referral</option>
                                             @foreach($referrals as $referral)
                                                 <option value="{{ $referral->name }}" {{ old('referred_by', $patient->referred_by) == $referral->name ? 'selected' : '' }}>
@@ -888,6 +888,28 @@
                     submitBtn.prop('disabled', false).html(originalBtnHtml);
                 });
         });
+
+        // Initialize Select2 for referral dropdown
+        if (typeof $.fn.select2 !== 'undefined') {
+            $('.select2-referral').select2({
+                placeholder: 'Search and select a referral',
+                allowClear: true,
+                width: '100%',
+                theme: 'default',
+                language: {
+                    noResults: function() {
+                        return "No referral found";
+                    },
+                    searching: function() {
+                        return "Searching...";
+                    }
+                }
+            });
+
+            $('.select2-referral').on('select2:open', function() {
+                $('.select2-search__field').attr('placeholder', 'Type to search...');
+            });
+        }
     });
 </script>
 
